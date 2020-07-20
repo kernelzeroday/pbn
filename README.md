@@ -47,3 +47,13 @@ IDK the status of pytox, which was used when writing owner.py. I am including it
 cli.c is an unauthenticated botnet client. Don't use it.
 
 I forget what i was doing with slim.c maybe it does the group stuff. IDK i will look at it in a bit.
+
+
+pytox works if u do 
+```
+pip3 install --user 'https://github.com/TokTok/py-toxcore-c/archive/v0.2.0.tar.gz'
+```
+
+added the half static makefile, builds on my osx but u probbaly need to modify it for linux. ill add the line that worked on my old linux box as a comment.
+
+the binary is only 422kb on my mac built half static btw

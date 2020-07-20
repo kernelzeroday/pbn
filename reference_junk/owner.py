@@ -8,6 +8,10 @@ import json
 import sys
 import faulthandler
 
+#this is bad and i feel bad
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
+
 faulthandler.enable(file=sys.stderr, all_threads=True)
 
 
@@ -85,7 +89,7 @@ class gay(Tox):
                         cstat = self.friend_get_connection_status(fid)
                         if cstat == Tox.CONNECTION_TCP or cstat == Tox.CONNECTION_UDP:
                             self.friend_send_message(fid, 0, 'exec uptime')
-                            sleep(.1)
+                            sleep(1)
                 except Exception as err:
                     print(err)
                     pass
@@ -110,9 +114,9 @@ class gay(Tox):
 
     def on_friend_message(self, friendId, type, message):
         try:
-            print('%s' % (message))
-            bots.remove(self.friend_get_public_key(friendId))
-            self.friend_delete(friendId)
+            print('got: %s' % (message))
+            #bots.remove(self.friend_get_public_key(friendId))
+            #self.friend_delete(friendId)
         except Exception as err:
             print(err)
             pass
