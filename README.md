@@ -52,3 +52,6 @@ pip3 install --user 'https://github.com/TokTok/py-toxcore-c/archive/v0.2.0.tar.g
 added the half static makefile, builds on my osx but u probbaly need to modify it for linux. ill add the line that worked on my old linux box as a comment.
 
 the binary is only 422kb on my mac built half static btw
+
+
+I need to make a proper p2pshell listener for cli.c, i was thinking about it and tbh its fine to just use as something like a reverse shell payload if i had a proper listener for it. tbd
