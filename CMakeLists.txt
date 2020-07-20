@@ -9,5 +9,4 @@ link_directories(/usr/local/lib)
 link_libraries(sodium toxcore)
 
 add_executable(bn bn.c)
-add_executable(cli cli.c)
 
