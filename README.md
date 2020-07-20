@@ -55,3 +55,77 @@ the binary is only 422kb on my mac built half static btw
 
 
 I need to make a proper p2pshell listener for cli.c, i was thinking about it and tbh its fine to just use as something like a reverse shell payload if i had a proper listener for it. tbd
+
+
+Groups are working. Yep. example session using minitox below.
+
+```
+$ ./minitox
+Type `/guide` to print the guide.
+Type `/help` to print command list.
+
+* Waiting to be online ...
+* You are Online(UDP)
+* receive friend request(use `/accept` to see).
+> /accept 1
+> /accept
+* (null) is Online(UDP)
+> /contacts
+#Friends(conctact_index|name|connection|status message):
+
+  2         Echo Bot   Online(UDP)  Echoing your messages
+  0         Echo Bot       Offline  Echoing your messages
+
+#Groups(contact_index|count of peers|name):
+
+> /invite 2
+> /contacts
+#Friends(conctact_index|name|connection|status message):
+
+  2         Echo Bot   Online(UDP)  Echoing your messages
+  0         Echo Bot       Offline  Echoing your messages
+
+#Groups(contact_index|count of peers|name):
+
+  3           2  (null)
+> /go 3
+05:59:37               | exec id
+05:59:37      Echo Bot | uid=501(kod) gid=20(staff) groups=20(staff),501(access_bpf),401(com.apple.sharepoint.group.1),12(everyone),61(localaccounts),79(_appserverusr),80(admin),81(_appserveradm),98(_lpadmin),333(piavpn),33(_appstore),100(_lpoperator),204(_developer),250(_analyticsusers),395(com.apple.access_ftp),398(com.apple.access_screensharing),399(com.apple.access_ssh)
+
+05:59:52               | uname -a
+06:00:07               | exec uname -a
+06:00:07      Echo Bot | Darwin m.local 18.7.0 Darwin Kernel Version 18.7.0: Mon Apr 27 20:09:39 PDT 2020; root:xnu-4903.278.35~1/RELEASE_X86_64 x86_64
+
+* receive friend request(use `/accept` to see).
+> /accept
+1        FRIEND      hi lmao
+> /accept 1
+* (null) is Online(UDP)
+> /contacts
+#Friends(conctact_index|name|connection|status message):
+
+  4         Echo Bot   Online(UDP)  Echoing your messages
+  2         Echo Bot   Online(UDP)  Echoing your messages
+  0         Echo Bot       Offline  Echoing your messages
+
+#Groups(contact_index|count of peers|name):
+
+  3           2  (null)
+> /invite 4 3
+> /contacts
+#Friends(conctact_index|name|connection|status message):
+
+  4         Echo Bot   Online(UDP)  Echoing your messages
+  2         Echo Bot   Online(UDP)  Echoing your messages
+  0         Echo Bot       Offline  Echoing your messages
+
+#Groups(contact_index|count of peers|name):
+
+  3           3  (null)
+06:01:45               | exec uname -a
+06:01:45      Echo Bot | Darwin m.local 18.7.0 Darwin Kernel Version 18.7.0: Mon Apr 27 20:09:39 PDT 2020; root:xnu-4903.278.35~1/RELEASE_X86_64 x86_64
+
+06:01:45      Echo Bot | Darwin m.local 18.7.0 Darwin Kernel Version 18.7.0: Mon Apr 27 20:09:39 PDT 2020; root:xnu-4903.278.35~1/RELEASE_X86_64 x86_64
+
+(null) <<<
+```
