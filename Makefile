@@ -6,12 +6,12 @@ def:
 	#gcc -o bn bn.c -Bstatic /usr/local/lib/libtoxcore.a /usr/local/lib/libsodium.a  -lpthread -lrt -lpgm -Bdynamic -lc -lm -lgcc
 	#idk this one
 	#gcc -o bn bn.c --static -ltoxcore -lzmq -lpthread -lm -lsodium -lrt -lgcc -lpgm  -lc
-	strip bn
+	strip pbn
 	#upx probably broke
 	#upx bn
 	#upx --ultra-brute bn
-	file bn
-	du -hs bn
+	file pbn
+	du -hs pbn
 	#no static:
 	#gcc -o cli cli.c -ltoxcore -lpthread -lsodium
 clean:
