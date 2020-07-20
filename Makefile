@@ -14,8 +14,6 @@ def:
 	du -hs pbn
 	#no static:
 	#gcc -o cli cli.c -ltoxcore -lpthread -lsodium
-minitox: minitox.c
-	$(CC) -std=c99 -o $@ $^ -libtoxcore
 clean:
 
 	rm -v bn
