@@ -1,4 +1,21 @@
 # pbn - P2P Bot Net
+```
+                    ..
+              . uW8"
+ .d``         `t888          u.    u.
+ @8Ne.   .u    8888   .    x@88k u@88c.
+ %8888:u@88N   9888.z88N  ^"8888""8888"
+  `888I  888.  9888  888E   8888  888R
+   888I  888I  9888  888E   8888  888R
+   888I  888I  9888  888E   8888  888R
+ uW888L  888'  9888  888E   8888  888R
+'*88888Nu88P  .8888  888"  "*88*" 8888"
+~ '88888F`     `%888*%"      ""   'Y"
+   888 ^          "`
+   *8E
+   '8>      P 2 P   B O T N E T
+    "
+```
 
 pbn is a fully distributed peer to peer botnet client written in C using tox as a base for communications.
 
