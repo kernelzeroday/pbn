@@ -25,3 +25,8 @@ When I wrote this i was pretty intoxicated, and did not document anything. Good 
 
 
 IDK the status of pytox, which was used when writing owner.py. I am including it as a reference for myself or others looking to build a new botnet controller interface.
+
+
+cli.c is an unauthenticated botnet client. Don't use it.
+
+I forget what i was doing with slim.c maybe it does the group stuff. IDK i will look at it in a bit.
