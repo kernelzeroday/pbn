@@ -22,3 +22,6 @@ Cheers
 # NOTES:
 
 When I wrote this i was pretty intoxicated, and did not document anything. Good luck on that. Also, c-toxcore was not documented at all and I just read the implementation to write this. Shit is probably wrong in many places, or changed since I last wrote it. I just built it against toktok/c-toxcore and it worked, but idk if conferences ever got implemented which was something I was looking at, and idk where i left group messages. Needs work, gl, hf.
+
+
+IDK the status of pytox, which was used when writing owner.py. I am including it as a reference for myself or others looking to build a new botnet controller interface.
