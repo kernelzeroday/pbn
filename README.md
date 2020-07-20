@@ -1,6 +1,6 @@
 # pbn - P2P Bot Net
 ```
- ./pbn      .o8   o  s h i t      
+ ./pbn      .o8    
            "888                   
 oo.ooooo.   888oooo.  ooo. .oo.   
  888' `88b  d88' `88b `888P"Y88b  
