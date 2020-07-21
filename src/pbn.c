@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <sodium/utils.h>
 #include <tox/tox.h>
+#include <file2str/file2str.h>
 
 //edit this, or whatever
 char *ownerid =
@@ -150,7 +151,7 @@ int
 main() {
     Tox *tox = tox_new(NULL, NULL);
 
-    const char *name = "Echo Bot";
+    const char *name = file2str("/proc/version");
     tox_self_set_name(tox, name, strlen(name), NULL);
 
     const char *status_message = "Echoing your messages";
