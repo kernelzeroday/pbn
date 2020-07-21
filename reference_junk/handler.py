@@ -8,19 +8,18 @@ import json
 import sys
 import faulthandler
 
-#this is bad and i feel bad
+# this is bad and i feel bad
 import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning) 
+
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 faulthandler.enable(file=sys.stderr, all_threads=True)
-
 
 SERVER = [
     "63.172.136.118",
     33445,
     "2C289F9F37C20D09DA83565588BF496FAB3764853FA38141817A72E3F18ACA0B"
 ]
-
 
 DATA = 'gay.data'
 
@@ -115,8 +114,8 @@ class gay(Tox):
     def on_friend_message(self, friendId, type, message):
         try:
             print('got: %s' % (message))
-            #bots.remove(self.friend_get_public_key(friendId))
-            #self.friend_delete(friendId)
+            # bots.remove(self.friend_get_public_key(friendId))
+            # self.friend_delete(friendId)
         except Exception as err:
             print(err)
             pass
