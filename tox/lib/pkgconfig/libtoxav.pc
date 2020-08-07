@@ -1,0 +1,11 @@
+prefix=/home/3fEsXhfjs/Projects/pbn/tox
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libtoxav
+Description: Tox A/V library
+Requires: libtoxcore
+Version: 0.2.12
+Libs: -L${libdir} -ltoxav -lopus -lvpx -lm
+Cflags: -I${includedir}

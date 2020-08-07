@@ -1,0 +1,11 @@
+prefix=/home/3fEsXhfjs/Projects/pbn/tox
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libtoxcore
+Description: Tox protocol library
+Requires:
+Version: 0.2.12
+Libs:  -L${libdir} -ltoxcore  -ltoxencryptsave   -lm -lpthread
+Cflags: -I${includedir}
